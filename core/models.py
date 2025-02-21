@@ -32,8 +32,8 @@ class Restaurant(models.Model):
 
 # Ratings Table
 class Rating(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rating")
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="rating")
     rating = models.PositiveSmallIntegerField()
 
     def __str__(self):
@@ -42,6 +42,6 @@ class Rating(models.Model):
 
 # Sales Table
 class Sales(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.SET_NULL, null=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.SET_NULL, null=True, related_name='sales')
     income = models.DecimalField(max_digits=8, decimal_places=2)
     datetime = models.DateTimeField()
